@@ -45,7 +45,6 @@ mix.scripts(
         'node_modules/bootstrap/js/bootstrap-alert.js',
         'node_modules/bootstrap/js/bootstrap-button.js',
         'node_modules/bootstrap/js/bootstrap-collapse.js',
-        'node_modules/bootstrap/js/bootstrap-dropdown.js',
         'node_modules/bootstrap/js/bootstrap-modal.js',
         'node_modules/bootstrap/js/bootstrap-tooltip.js',
         'node_modules/bootstrap/js/bootstrap-popover.js',
