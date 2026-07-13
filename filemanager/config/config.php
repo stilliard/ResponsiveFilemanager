@@ -487,6 +487,21 @@ $config = [
     'file_number_limit_js'                    => 500,
 
     //**********************
+    // Paging
+    //**********************
+    //Number of items (folders + files) rendered per request. When the current folder contains more
+    //items, a "Load more" button appears (with optional auto-load on scroll, see paging_auto) and
+    //further pages are fetched via AJAX. This keeps the first page fast in folders with tens of
+    //thousands of files, and bounds expensive per-file work (thumbnail creation, image size reads)
+    //to one page at a time. Set to 0 to disable paging and render everything (legacy behaviour).
+    //Note: when paging is enabled, filtering and sorting are always handled server-side, and
+    //show_folder_size / show_total_size still recurse the whole tree on every request, which
+    //defeats the purpose of paging - keep them disabled in large trees.
+    'paging_items'                            => 1000,
+    //Automatically load the next page when scrolling near the bottom of the list.
+    'paging_auto'                             => true,
+
+    //**********************
     // Hidden files and folders
     //**********************
     // set the names of any folders you want hidden (eg "hidden_folder1", "hidden_folder2" ) Remember all folders with these names will be hidden (you can set any exceptions in config.php files on folders)

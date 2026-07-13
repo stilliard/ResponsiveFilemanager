@@ -264,6 +264,11 @@ if (isset($_GET["descending"])) {
     $descending = $_SESSION['RF']['descending'];
 }
 
+//paging
+$paging_items = isset($config['paging_items']) ? (int) $config['paging_items'] : 0;
+$paging = $paging_items > 0;
+$load_more_start = ($paging && isset($_GET['load_more_start'])) ? max(0, (int) $_GET['load_more_start']) : 0;
+
 $boolarray = [false => 'false', true => 'true'];
 
 $return_relative_url = isset($_GET['relative_url']) && $_GET['relative_url'] == "1";
@@ -408,6 +413,12 @@ $get_params = http_build_query($get_params);
 
     <script src="js/include.js?v=<?php
     echo $version; ?>"></script>
+    <?php
+    if ($paging) { ?>
+        <script src="js/load_more.js?v=<?php
+        echo $version; ?>"></script>
+    <?php
+    } ?>
 </head>
 <body>
 <!-- The Templates plugin is included to render the upload/download listings -->
@@ -491,6 +502,8 @@ echo $rfm_subfolder; ?>"/>
 echo $return_relative_url == true ? 1 : 0; ?>"/>
 <input type="hidden" id="file_number_limit_js" value="<?php
 echo $config['file_number_limit_js']; ?>"/>
+<input type="hidden" id="rf_paging" value="<?php
+echo $paging ? 1 : 0; ?>"/>
 <input type="hidden" id="sort_by" value="<?php
 echo $sort_by; ?>"/>
 <input type="hidden" id="descending" value="<?php
@@ -790,6 +803,10 @@ if ($config['upload_files']) { ?>
 
     $n_files = count($files);
 
+    // With paging only part of the listing is in the DOM, so filtering must happen server-side
+    // (client-side filtering would miss matches on pages that aren't loaded yet)
+    $server_side_filter = $paging || $n_files > $config['file_number_limit_js'];
+
     //php sorting
     $sorted = [];
     //$current_folder=array();
@@ -832,7 +849,7 @@ if ($config['upload_files']) { ?>
                             )) ||
                         ($file == '..' && $subdir == '') ||
                         in_array($file, $config['hidden_folders']) ||
-                        ($filter != '' && $n_files > $config['file_number_limit_js'] && $file != ".." && stripos(
+                        ($filter != '' && $server_side_filter && $file != ".." && stripos(
                                 $file,
                                 $filter
                             ) === false))) {
@@ -1262,6 +1279,11 @@ if ($config['upload_files']) { ?>
             echo "list-view" . $view; ?>" id="main-item-container">
                 <?php
 
+                // Counts every item that would render; used to slice the folder and file loops
+                // into pages. Matches load_more.js's contract: data-start is the number of <li>
+                // elements already appended to the grid.
+                $paged_index = 0;
+                $paging_has_more = false;
 
                 foreach ($files as $file_array) {
                     $file = $file_array['file'];
@@ -1276,12 +1298,20 @@ if ($config['upload_files']) { ?>
                             )) || ($file == '..' && $subdir == '') || in_array(
                             $file,
                             $config['hidden_folders']
-                        ) || ($filter != '' && $n_files > $config['file_number_limit_js'] && $file != ".." && stripos(
+                        ) || ($filter != '' && $server_side_filter && $file != ".." && stripos(
                                 $file,
                                 $filter
                             ) === false)) {
                         continue;
                     }
+                    if ($paging && ($paged_index < $load_more_start || $paged_index >= $load_more_start + $paging_items)) {
+                        if ($paged_index >= $load_more_start + $paging_items) {
+                            $paging_has_more = true;
+                        }
+                        $paged_index++;
+                        continue;
+                    }
+                    $paged_index++;
                     $new_name = fix_filename($file, $config);
                     if ($ftp && $file != '..' && $file != $new_name) {
                         //rename
@@ -1451,7 +1481,7 @@ if ($config['upload_files']) { ?>
                     ) || !check_extension(
                         $file_array['extension'],
                         $config
-                    ) || ($filter != '' && $n_files > $config['file_number_limit_js'] && stripos(
+                    ) || ($filter != '' && $server_side_filter && stripos(
                             $file,
                             $filter
                         ) === false)) {
@@ -1462,6 +1492,26 @@ if ($config['upload_files']) { ?>
                         continue 2;
                     }
                 }
+
+                // Skip files the dialog type doesn't show (images-only or media-only dialogs)
+                // before any per-file work, so skipped items cost nothing and don't tick the
+                // paging counter.
+                $is_img = in_array($file_array['extension'], $config['ext_img']);
+                $is_video = in_array($file_array['extension'], $config['ext_video']);
+                $is_audio = in_array($file_array['extension'], $config['ext_music']);
+                if (($_GET['type'] == 1 && !$is_img) || ($_GET['type'] == 3 && !$is_video && !$is_audio)) {
+                    continue;
+                }
+
+                if ($paging && ($paged_index < $load_more_start || $paged_index >= $load_more_start + $paging_items)) {
+                    if ($paged_index >= $load_more_start + $paging_items) {
+                        $paging_has_more = true;
+                    }
+                    $paged_index++;
+                    continue;
+                }
+                $paged_index++;
+
                 $filename = substr($file, 0, '-' . (strlen($file_array['extension']) + 1));
                 if (strlen($file_array['extension']) === 0) {
                     $filename = $file;
@@ -1498,16 +1548,12 @@ if ($config['upload_files']) { ?>
                     $file_path = $config['ftp_base_url'] . $config['upload_dir'] . $rfm_subfolder . $subdir . $file;
                 }
 
-                $is_img = false;
-                $is_video = false;
-                $is_audio = false;
                 $show_original = false;
                 $show_original_mini = false;
                 $mini_src = "";
                 $src_thumb = "";
-                if (in_array($file_array['extension'], $config['ext_img'])) {
+                if ($is_img) {
                     $src = $file_path;
-                    $is_img = true;
 
                     $img_width = $img_height = "";
                     if ($ftp) {
@@ -1551,20 +1597,17 @@ if ($config['upload_files']) { ?>
                 }
 
                 $class_ext = 0;
-                if (in_array($file_array['extension'], $config['ext_video'])) {
+                if ($is_video) {
                     $class_ext = 4;
-                    $is_video = true;
-                } elseif (in_array($file_array['extension'], $config['ext_img'])) {
+                } elseif ($is_img) {
                     $class_ext = 2;
-                } elseif (in_array($file_array['extension'], $config['ext_music'])) {
+                } elseif ($is_audio) {
                     $class_ext = 5;
-                    $is_audio = true;
                 } elseif (in_array($file_array['extension'], $config['ext_misc'])) {
                     $class_ext = 3;
                 } else {
                     $class_ext = 1;
                 }
-                if ((!($_GET['type'] == 1 && !$is_img) && !(($_GET['type'] == 3 && !$is_video) && ($_GET['type'] == 3 && !$is_audio))) && $class_ext > 0){
                 ?>
                 <li class="ff-item-type-<?php
                 echo $class_ext; ?> file <?php
@@ -1779,10 +1822,26 @@ if ($config['upload_files']) { ?>
                 </li>
             <?php
             }
-            }
 
             ?></div>
         </ul>
+        <?php
+        if ($paging) { ?>
+            <div id="load-more-container" class="text-center"
+                 data-start="<?php
+                 echo min($paged_index, $load_more_start + $paging_items); ?>"
+                 data-auto="<?php
+                 echo $config['paging_auto'] ? 1 : 0; ?>"<?php
+            if (!$paging_has_more) {
+                echo ' style="display:none;"';
+            } ?>>
+                <button type="button" id="btn-load-more" class="btn"><?php
+                    echo trans('Load_more'); ?></button>
+                <img id="load-more-indicator" src="img/loading.gif" alt="<?php
+                echo trans('Loading'); ?>" style="display:none;"/>
+            </div>
+        <?php
+        } ?>
         <?php
         } ?>
     </div>

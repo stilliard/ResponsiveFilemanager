@@ -29,6 +29,8 @@ return [
     'Root' => 'root',
     'Rename' => 'Rename',
     'Back' => 'back',
+    'Load_more' => 'Load more',
+    'Loading' => 'Loading',
     'View' => 'View',
     'View_list' => 'List view',
     'View_columns_list' => 'Columns list view',
