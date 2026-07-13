@@ -513,6 +513,7 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 						var fil = jQuery('#files_number');
 						fil.text(parseInt(fil.text())-1);
 						_this.parent().parent().parent().parent().remove();
+						load_more_items_removed(1);
 					}
 				});
 			});
@@ -530,6 +531,7 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 						var fol = jQuery('#folders_number');
 						fol.text(parseInt(fol.text())-1);
 						_this.parent().parent().parent().remove();
+						load_more_items_removed(1);
 					}
 				});
 			});
@@ -836,13 +838,15 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 			jQuery('#previewLightbox').lightbox('hide');
 		});
 
-		jQuery('body').on('click', function (){ 
-			jQuery('.tip-right').tooltip('hide'); 
+		jQuery('body').on('click', function (){
+			hide_grid_tooltips();
 		});
 
 		FileManager.bindGridEvents();
 
-		if (parseInt(jQuery('#file_number').val()) > parseInt(jQuery('#file_number_limit_js').val()))
+		// With paging only part of the listing is in the DOM, so sorting and
+		// filtering always have to go through the server
+		if (jQuery('#rf_paging').val() == 1 || parseInt(jQuery('#file_number').val()) > parseInt(jQuery('#file_number_limit_js').val()))
 		{
 			var js_script = false;
 		}
@@ -964,8 +968,13 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 		{
 			jQuery('.tip').tooltip({ placement: "bottom" });
 			jQuery('.tip-top').tooltip({ placement: "top" });
-			jQuery('.tip-left').tooltip({ placement: "left" });
-			jQuery('.tip-right').tooltip({ placement: "right" });
+			// Tooltips inside the grid are delegated to a single instance instead of
+			// one per action button, so init stays cheap with thousands of items and
+			// items appended by load_more.js work without re-initialization
+			jQuery('#main-item-container').tooltip({ selector: '.tip-left', placement: "left" });
+			jQuery('.ff-container').tooltip({ selector: '#main-item-container .tip-right', placement: "right" });
+			jQuery('.tip-left').not('#main-item-container .tip-left').tooltip({ placement: "left" });
+			jQuery('.tip-right').not('#main-item-container .tip-right').tooltip({ placement: "right" });
 			jQuery('body').addClass('no-touch');
 		}
 		else
@@ -982,6 +991,29 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 				threshold: 30
 			});
 		}
+
+		// Re-initialize per-item behaviour on items appended by load_more.js
+		jQuery(document).on('rf:appended', function (e, $items)
+		{
+			if (Modernizr.touch)
+			{
+				$items.find('.box:not(.no-effect)').swipe({
+					swipeLeft: swipe_reaction,
+					swipeRight: swipe_reaction,
+					threshold: 30
+				});
+			}
+
+			// Re-apply the active type filter so appended items respect it
+			if (typeof(Storage) !== "undefined" && jQuery('#type_param').val() != 1 && jQuery('#type_param').val() != 3)
+			{
+				var li = localStorage.getItem("sort");
+				if (li)
+				{
+					$items.not('.' + li).hide();
+				}
+			}
+		});
 
 		jQuery('.paste-here-btn').on('click', function ()
 		{
@@ -1038,9 +1070,12 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 					execute_multiple_action('delete_files', files, '', '', '');
 					var fil = jQuery('#files_number');
 					fil.text(parseInt(fil.text())-files.length);
+					var removed = 0;
 					jQuery('.selection:checkbox:checked:visible').each(function () {
 						jQuery(this).closest('li').remove();
+						removed++;
 					});
+					load_more_items_removed(removed);
 					jQuery("#multiple-selection").hide(300);
 				}
 			});
@@ -1744,6 +1779,37 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 		}
 	}
 
+	function hide_grid_tooltips()
+	{
+		// Only touch tooltips that are actually open (0 or 1 in practice) instead
+		// of iterating every tooltip anchor on the page. Bootstrap inserts the tip
+		// element right after its anchor, so the anchor is the previous sibling.
+		jQuery('.tooltip.in').each(function ()
+		{
+			var tooltip = jQuery(this).prev().data('tooltip');
+			if (tooltip)
+			{
+				tooltip.hide();
+			}
+			else
+			{
+				jQuery(this).remove();
+			}
+		});
+	}
+
+	function load_more_items_removed(count)
+	{
+		// Keep the "load more" offset in sync when items are removed from the
+		// grid, so the next page doesn't skip items
+		var container = jQuery('#load-more-container');
+		if (container.length)
+		{
+			var start = parseInt(container.data('start'), 10) || 0;
+			container.data('start', Math.max(0, start - count));
+		}
+	}
+
 	function swipe_reaction(/*event, direction, distance, duration, fingerCount*/)
 	{
 		var _this = jQuery(this);
@@ -2095,7 +2161,7 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 		console.log(el);
 		var _this = el.parent().find('form a');
 		_this[1].click();
-		jQuery('.tip-right').tooltip('hide');
+		hide_grid_tooltips();
 	}
 
 	function getUrlParam(paramName)

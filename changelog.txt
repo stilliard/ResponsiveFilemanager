@@ -1,4 +1,13 @@
-Responsive Filemanager Changelog 
+Responsive Filemanager Changelog
+
+*********************************************************
+*  Unreleased
+*********************************************************
+- add paging of large folders via new paging_items / paging_auto config options: items are
+  rendered in pages with a "Load more" button (and optional auto-load on scroll), so thumbnail
+  creation and image size reads are bounded to one page instead of the whole folder
+- fix slow init with thousands of files: grid tooltips now use a single delegated instance
+  instead of one per action button
 
 *********************************************************
 *  RFM 9.14.0

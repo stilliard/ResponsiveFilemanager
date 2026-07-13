@@ -13,12 +13,21 @@
 
       var $container = $('#load-more-container');
       if ($container.length) {
+         // The server hides the container when there are no further pages
+         loadMoreAvail = $container.css('display') !== 'none';
+
          // If auto-loading is enabled
          if ($container.data('auto') === 1) {
             // Handle window scroll event
             $(window).on('scroll', throttle(function () {
                onWindowScroll();
             }, 250));
+
+            // Fill short viewports: without a scrollbar the scroll event can
+            // never fire, so start loading the next page immediately
+            if (loadMoreAvail && $(document).height() <= $(window).height()) {
+               loadMore();
+            }
          }
 
          // Handle click on "Load more" button
@@ -79,8 +88,17 @@
       // Show loading indicator
       $('#load-more-indicator').show();
 
+      // Build the request URL from the current query string, dropping any
+      // previous load_more_start parameter (and the fragment, which is never
+      // sent to the server anyway)
+      var params = window.location.search.replace(/^\?/, '').split('&').filter(function (param) {
+         return param !== '' && param.indexOf('load_more_start=') !== 0;
+      });
+      params.push('load_more_start=' + start);
+      var url = window.location.pathname + '?' + params.join('&');
+
       $.ajax({
-            url: window.location + '&load_more_start=' + start
+            url: url
          })
          .done(function (html) {
             var $items = $(html).find('#main-item-container > li');
@@ -104,6 +122,10 @@
                   lazyLoad.update();
                }
 
+               // Notify listeners (include.js) so per-item behaviour can be
+               // re-initialized on the newly appended items
+               $(document).trigger('rf:appended', [$items]);
+
             } else {
                // Indicate that no more data is available
                loadMoreAvail = false;
@@ -119,6 +141,14 @@
 
             // Indicate that Ajax request is no longer in progress
             loadMoreInProgress = false;
+
+            // In auto mode keep loading until the page gets a scrollbar,
+            // otherwise scroll events can never trigger the next page on
+            // short/tall viewports
+            if (loadMoreAvail && $container.data('auto') === 1
+               && $(document).height() <= $(window).height()) {
+               loadMore();
+            }
          });
    }
 
