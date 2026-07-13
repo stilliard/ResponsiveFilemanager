@@ -8,6 +8,11 @@ Responsive Filemanager Changelog
   creation and image size reads are bounded to one page instead of the whole folder
 - fix slow init with thousands of files: grid tooltips now use a single delegated instance
   instead of one per action button
+- fix dead sorting dropdown (bootstrap-dropdown.js was bundled twice, so the menu closed
+  as soon as it opened)
+- change default sorting to filename ascending
+- fix asset build with current toolchains (bootstrap-lightbox git tag, webpack version cap
+  for laravel-mix 6); building now requires yarn: npx yarn install --ignore-engines
 
 *********************************************************
 *  RFM 9.14.0
