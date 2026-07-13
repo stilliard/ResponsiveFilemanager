@@ -255,7 +255,7 @@ if (isset($_GET["sort_by"])) {
 }
 
 if (!isset($_SESSION['RF']['descending'])) {
-    $_SESSION['RF']['descending'] = true;
+    $_SESSION['RF']['descending'] = false;
 }
 
 if (isset($_GET["descending"])) {
