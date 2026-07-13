@@ -1,5 +1,5 @@
 <?php
-$version = "9.14.0";
+$version = "11.0.0";
 if (session_id() == '') {
     session_start();
 }

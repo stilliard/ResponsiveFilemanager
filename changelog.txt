@@ -1,7 +1,7 @@
 Responsive Filemanager Changelog
 
 *********************************************************
-*  Unreleased
+*  RFM 11.0.0
 *********************************************************
 - add paging of large folders via new paging_items / paging_auto config options: items are
   rendered in pages with a "Load more" button (and optional auto-load on scroll), so thumbnail
