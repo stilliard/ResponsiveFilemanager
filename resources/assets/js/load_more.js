@@ -88,9 +88,14 @@
       // Show loading indicator
       $('#load-more-indicator').show();
 
-      // Build the request URL, replacing any previous load_more_start parameter
-      var url = String(window.location).replace(/[?&]load_more_start=[^&]*/g, '');
-      url += (url.indexOf('?') >= 0 ? '&' : '?') + 'load_more_start=' + start;
+      // Build the request URL from the current query string, dropping any
+      // previous load_more_start parameter (and the fragment, which is never
+      // sent to the server anyway)
+      var params = window.location.search.replace(/^\?/, '').split('&').filter(function (param) {
+         return param !== '' && param.indexOf('load_more_start=') !== 0;
+      });
+      params.push('load_more_start=' + start);
+      var url = window.location.pathname + '?' + params.join('&');
 
       $.ajax({
             url: url

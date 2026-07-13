@@ -1781,14 +1781,19 @@ var encodeURL,show_animation,hide_animation,apply,apply_none,apply_img,apply_any
 
 	function hide_grid_tooltips()
 	{
-		jQuery('.tip-right').each(function ()
+		// Only touch tooltips that are actually open (0 or 1 in practice) instead
+		// of iterating every tooltip anchor on the page. Bootstrap inserts the tip
+		// element right after its anchor, so the anchor is the previous sibling.
+		jQuery('.tooltip.in').each(function ()
 		{
-			// Only hide instantiated tooltips - calling tooltip('hide') on the whole
-			// selection would create an instance for every element on the page
-			var tooltip = jQuery(this).data('tooltip');
+			var tooltip = jQuery(this).prev().data('tooltip');
 			if (tooltip)
 			{
 				tooltip.hide();
+			}
+			else
+			{
+				jQuery(this).remove();
 			}
 		});
 	}
