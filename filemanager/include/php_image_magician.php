@@ -3737,10 +3737,7 @@ class imageLib {
 
     public function __destruct()
     {
-        if (is_resource($this->imageResized) || $this->imageResized instanceof \GdImage)
-        {
-            imagedestroy($this->imageResized);
-        }
+
     }
 
 ## --------------------------------------------------------
