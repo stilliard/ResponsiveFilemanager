@@ -3736,7 +3736,10 @@ class imageLib {
 
     public function __destruct()
     {
-
+		if(is_resource($this->imageResized)) 
+		{
+			imagedestroy($this->imageResized);
+		}
     }
 
 ## --------------------------------------------------------
