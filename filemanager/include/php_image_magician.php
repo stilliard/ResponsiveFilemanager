@@ -489,8 +489,7 @@ class imageLib {
         // *** Crop this bad boy
         $crop = imagecreatetruecolor($newWidth, $newHeight);
         $this->keepTransparancy($optimalWidth, $optimalHeight, $crop);
-        imagecopyresampled($crop, $this->imageResized, 0, 0, $cropStartX, $cropStartY, $newWidth, $newHeight, $newWidth, $newHeight);
-
+		imagecopyresampled($crop, $this->imageResized, 0, 0, (int)  $cropStartX, (int) $cropStartY, $newWidth, $newHeight, $newWidth, $newHeight);
         $this->imageResized = $crop;
 
         // *** Set new width and height to our variables
@@ -3737,10 +3736,10 @@ class imageLib {
 
     public function __destruct()
     {
-        if (is_resource($this->imageResized) || $this->imageResized instanceof \GdImage)
-        {
-            imagedestroy($this->imageResized);
-        }
+		if(is_resource($this->imageResized)) 
+		{
+			imagedestroy($this->imageResized);
+		}
     }
 
 ## --------------------------------------------------------
