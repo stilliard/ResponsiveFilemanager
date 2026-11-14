@@ -3,6 +3,9 @@ name: CI
 on:
   pull_request:
 
+permissions:
+  contents: read
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -11,8 +14,11 @@ jobs:
   php:
     name: PHP lint & Psalm
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -30,8 +36,11 @@ jobs:
   e2e:
     name: Build & Playwright e2e
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - uses: shivammathur/setup-php@v2
         with:
