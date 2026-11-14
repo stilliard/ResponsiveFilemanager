@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="6"
+    phpVersion="7.4"
+    findUnusedBaselineEntry="false"
+    findUnusedCode="false"
+    xmlns="https://getpsalm.org/schema/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    errorBaseline="psalm-baseline.xml"
+>
+    <projectFiles>
+        <directory name="filemanager" />
+        <ignoreFiles>
+            <directory name="filemanager/lang" />
+        </ignoreFiles>
+    </projectFiles>
+</psalm>

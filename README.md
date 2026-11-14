@@ -1,6 +1,6 @@
 # Responsive FileManager for TinyMCE and CKEditor
 
-[![Build Status](https://travis-ci.org/trippo/ResponsiveFilemanager.svg?branch=master)](https://travis-ci.org/trippo/ResponsiveFilemanager)
+> This is a fork of [trippo/ResponsiveFilemanager](https://github.com/trippo/ResponsiveFilemanager), which is now archived. This fork continues maintenance with PHP 7.4 compatibility and accepts fixes/improvements.
 
 Responsive FileManager is a free open-source file manager made with the jQuery library, CSS3, PHP and HTML5 that offers a nice and elegant way to upload and insert files, images and videos. You can use it as external plugin for TinyMCE version 4.x. or CKEditor and you can also use it as a stand-alone file manager to manage and select files. The script automatically creates thumbnails of images for the preview list and can create also external thumbnails to use in your cms or site. It can be configured for automatic resizing of uploaded images or to automatically limit the size. You can personalize the configuration for each folder. You can set a subfolder as the root and change the configuration for each user, page or FileManager call. Is compatible with multi-user mode and you can edit images with aviary editor, sorting files.
 
@@ -14,7 +14,7 @@ Creator: info@albertoperipolli.com - tr1pp0
 
 ### Server Requirements
 
-- PHP 7.1 or above strongly recommended
+- PHP 7.4 or above strongly recommended
 - [Apache 2.2 or 2.4](https://httpd.apache.org/)
 
 ### Localization
@@ -68,6 +68,20 @@ In order to work on assets, you need to install [Node.js](http://nodejs.org) and
    ```
 
 Gulp use [laravel-elixir](http://laravel.com/docs/5.0/elixir)
+
+#### Linting and tests
+
+Static analysis is run with [Psalm](https://psalm.dev/) (via Composer, dev-only — the app itself has no runtime PHP dependencies), and a small end-to-end suite runs with [Playwright](https://playwright.dev/):
+
+```
+composer install           # install Psalm
+composer run psalm         # baselined static analysis
+composer run psalm-taint   # taint-mode security analysis (informational)
+
+yarn test:e2e               # Playwright end-to-end tests, starts its own PHP server
+```
+
+See `AGENTS.md` for more detail on what each check covers.
 
 ### Credits
 

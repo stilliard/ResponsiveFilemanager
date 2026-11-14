@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+  <file src="filemanager/UploadHandler.php">
+    <InvalidArgument>
+      <code><![CDATA[microtime(true)]]></code>
+    </InvalidArgument>
+    <InvalidArrayAccess>
+      <code><![CDATA[$output[0]]]></code>
+    </InvalidArrayAccess>
+    <InvalidArrayOffset>
+      <code><![CDATA[$splited[count($splited)-1]]]></code>
+    </InvalidArrayOffset>
+    <InvalidClass>
+      <code><![CDATA[\imagick]]></code>
+      <code><![CDATA[\imagick]]></code>
+      <code><![CDATA[\imagick]]></code>
+      <code><![CDATA[\imagick]]></code>
+      <code><![CDATA[\imagick]]></code>
+      <code><![CDATA[\imagick]]></code>
+      <code><![CDATA[\imagick]]></code>
+      <code><![CDATA[\imagick]]></code>
+      <code><![CDATA[\imagick]]></code>
+      <code><![CDATA[\imagick]]></code>
+    </InvalidClass>
+    <UndefinedFunction>
+      <code><![CDATA[create_img($targetFile, $targetFile, $srcWidth, $srcHeight, $this->options['config']['image_max_mode'])]]></code>
+      <code><![CDATA[create_img($targetFile, $targetFile, $this->options['config']['image_resizing_width'], $this->options['config']['image_resizing_height'], $this->options['config']['image_resizing_mode'])]]></code>
+      <code><![CDATA[create_img($targetFile, $targetFileThumb, 122, 91)]]></code>
+      <code><![CDATA[is_function_callable('chmod')]]></code>
+      <code><![CDATA[new_thumbnails_creation($targetPath,$targetFile,$_FILES['files']['name'][0],$this->options['config']['current_path'],$this->options['config'])]]></code>
+      <code><![CDATA[trans("Not enough Memory")]]></code>
+      <code><![CDATA[trans("Not enough Memory")]]></code>
+    </UndefinedFunction>
+  </file>
+  <file src="filemanager/ajax_calls.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[$config['base_url']]]></code>
+      <code><![CDATA[$config['base_url']]]></code>
+      <code><![CDATA[$config['chmod_dirs']]]></code>
+      <code><![CDATA[$config['chmod_dirs']]]></code>
+      <code><![CDATA[$config['chmod_files']]]></code>
+      <code><![CDATA[$config['chmod_files']]]></code>
+      <code><![CDATA[$config['copy_cut_dirs']]]></code>
+      <code><![CDATA[$config['copy_cut_files']]]></code>
+      <code><![CDATA[$config['current_path']]]></code>
+      <code><![CDATA[$config['current_path']]]></code>
+      <code><![CDATA[$config['current_path']]]></code>
+      <code><![CDATA[$config['current_path']]]></code>
+      <code><![CDATA[$config['current_path']]]></code>
+      <code><![CDATA[$config['current_path']]]></code>
+      <code><![CDATA[$config['current_path']]]></code>
+      <code><![CDATA[$config['current_path']]]></code>
+      <code><![CDATA[$config['edit_text_files']]]></code>
+      <code><![CDATA[$config['editable_text_file_exts']]]></code>
+      <code><![CDATA[$config['editable_text_file_exts']]]></code>
+      <code><![CDATA[$config['ext_music']]]></code>
+      <code><![CDATA[$config['ext_video']]]></code>
+      <code><![CDATA[$config['extract_files']]]></code>
+      <code><![CDATA[$config['ftp_base_url']]]></code>
+      <code><![CDATA[$config['ftp_base_url']]]></code>
+      <code><![CDATA[$config['ftp_base_url']]]></code>
+      <code><![CDATA[$config['ftp_base_url']]]></code>
+      <code><![CDATA[$config['ftp_base_url']]]></code>
+      <code><![CDATA[$config['googledoc_enabled']]]></code>
+      <code><![CDATA[$config['googledoc_file_exts']]]></code>
+      <code><![CDATA[$config['preview_text_files']]]></code>
+      <code><![CDATA[$config['previewable_text_file_exts']]]></code>
+      <code><![CDATA[$config['upload_dir']]]></code>
+      <code><![CDATA[$config['upload_dir']]]></code>
+      <code><![CDATA[$config['upload_dir']]]></code>
+      <code><![CDATA[$config['upload_dir']]]></code>
+      <code><![CDATA[$config['upload_dir']]]></code>
+      <code><![CDATA[$config['upload_dir']]]></code>
+      <code><![CDATA[$config['upload_dir']]]></code>
+    </InvalidArrayOffset>
+    <UndefinedDocblockClass>
+      <code><![CDATA[response($content)]]></code>
+      <code><![CDATA[response($ret)]]></code>
+      <code><![CDATA[response($ret)]]></code>
+      <code><![CDATA[response($ret)]]></code>
+      <code><![CDATA[response($ret)]]></code>
+      <code><![CDATA[response('Extension not allowed')]]></code>
+      <code><![CDATA[response('File type not allowed')]]></code>
+      <code><![CDATA[response(sprintf(trans('Copy_Cut_Count_Limit'), $msg_sub_action, $config['copy_cut_max_count']).AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('Copy_Cut_Not_Allowed'), $msg_sub_action, trans('Files')).AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('Copy_Cut_Not_Allowed'), $msg_sub_action, trans('Folders')).AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('Copy_Cut_Size_Limit'), $msg_sub_action, $config['copy_cut_max_size']).AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('File_Open_Edit_Not_Allowed'), ($sub_action == 'preview' ? strtolower(trans('Open')) : strtolower(trans('Edit')))).AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('File_Permission_Not_Allowed'), (is_dir($path) ? trans('Folders') : trans('Files')), 403).AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('File_Permission_Not_Allowed'), (is_dir($path) ? trans('Folders') : trans('Files')), 403).AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('max_size_reached'), $config['MaxSizeTotal']).AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('max_size_reached'), $config['MaxSizeTotal']).AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('max_size_reached'), $config['MaxSizeTotal']).AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('File_Not_Found').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('File_Not_Found').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Lang_Not_Found').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Lang_Not_Found').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Lang_Not_Found').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Lang_Not_Found').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Lang_Not_Found').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('TUI_Decode_Failed').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Zip_Invalid').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Zip_No_Extract').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('forbidden').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('no action passed').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('no action passed').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('no path').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('view type number missing').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('view type number missing').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong action').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong action').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong path').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong path').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong sub-action').AddErrorLocation())]]></code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="filemanager/dialog.php">
+    <InvalidArgument>
+      <code><![CDATA[$ftp]]></code>
+      <code><![CDATA[$ftp]]></code>
+      <code><![CDATA[false]]></code>
+      <code><![CDATA[false]]></code>
+      <code><![CDATA[false]]></code>
+    </InvalidArgument>
+    <InvalidArrayOffset>
+      <code><![CDATA[$config['access_keys']]]></code>
+      <code><![CDATA[$src[count($src) - 2]]]></code>
+      <code><![CDATA[[false => 'false', true => 'true']]]></code>
+    </InvalidArrayOffset>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$lang]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="filemanager/execute.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[$config['current_path']]]></code>
+    </InvalidArrayOffset>
+    <UndefinedDocblockClass>
+      <code><![CDATA[response()]]></code>
+      <code><![CDATA[response()]]></code>
+      <code><![CDATA[response()]]></code>
+      <code><![CDATA[response(sprintf(trans('File_Open_Edit_Not_Allowed'), strtolower(trans('Edit'))) . AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('File_Open_Edit_Not_Allowed'), strtolower(trans('Edit'))) . AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('File_Permission_Not_Allowed'), (is_dir($path) ? (trans('Folders')) : (trans('Files')))) . AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('Function_Disabled'), 'chmod') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('Function_Disabled'), ($action == 'copy' ? (trans('Copy')) : (trans('Cut')))) . AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('max_size_reached'), $config['MaxSizeTotal']) . AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('max_size_reached'), $config['MaxSizeTotal']) . AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('max_size_reached'), $config['MaxSizeTotal']) . AddErrorLocation())]]></code>
+      <code><![CDATA[response(sprintf(trans('max_size_reached'), $config['MaxSizeTotal']) . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans("wrong option") . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Dir_No_Write') . '<br/>' . str_replace('../', '', $path) . '<br/>' . str_replace('../', '', $path_thumb) . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Empty_name') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Empty_name') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Empty_name') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Empty_name') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Error_extension') . ' ' . sprintf(trans('Valid_Extensions'), implode(', ', $config['editable_text_file_exts'])) . AddErrorLocation(), 400)]]></code>
+      <code><![CDATA[response(trans('File_Not_Found') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('File_Permission_Wrong_Mode') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('File_Save_Error') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('File_Save_Error') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('File_Save_OK'))]]></code>
+      <code><![CDATA[response(trans('File_Save_OK'))]]></code>
+      <code><![CDATA[response(trans('File_Save_OK'))]]></code>
+      <code><![CDATA[response(trans('File_Save_OK'))]]></code>
+      <code><![CDATA[response(trans('Lang_Not_Found') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Lang_Not_Found') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('No_Extension') . ' ' . sprintf(trans('Valid_Extensions'), implode(', ', $config['editable_text_file_exts'])) . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Rename_existing_file') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Rename_existing_file') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Rename_existing_file') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Rename_existing_folder') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('Rename_existing_folder').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('forbidden') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong action') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong action') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong extension') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong name') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong path') . AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong path').AddErrorLocation())]]></code>
+      <code><![CDATA[response(trans('wrong path').AddErrorLocation())]]></code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="filemanager/force_download.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[$config['current_path']]]></code>
+      <code><![CDATA[$config['ftp_base_url']]]></code>
+      <code><![CDATA[$config['upload_dir']]]></code>
+    </InvalidArrayOffset>
+    <UndefinedDocblockClass>
+      <code><![CDATA[response(trans('File_Not_Found') . AddErrorLocation(), 404)]]></code>
+      <code><![CDATA[response(trans('forbidden') . AddErrorLocation(), 403)]]></code>
+      <code><![CDATA[response(trans('wrong extension') . AddErrorLocation(), 400)]]></code>
+      <code><![CDATA[response(trans('wrong path') . AddErrorLocation(), 400)]]></code>
+      <code><![CDATA[response(trans('wrong path') . AddErrorLocation(), 400)]]></code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="filemanager/include/FtpClient.php">
+    <InvalidClass>
+      <code><![CDATA[FTPClient]]></code>
+    </InvalidClass>
+    <InvalidParamDefault>
+      <code><![CDATA[callable]]></code>
+    </InvalidParamDefault>
+    <InvalidReturnStatement>
+      <code><![CDATA[$result]]></code>
+      <code><![CDATA[$this->ftp->mkdir($directory)]]></code>
+      <code><![CDATA[date($format, $time)]]></code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[int]]></code>
+    </InvalidReturnType>
+  </file>
+  <file src="filemanager/include/Response.php">
+    <InvalidReturnType>
+      <code><![CDATA[$this]]></code>
+    </InvalidReturnType>
+    <UndefinedMethod>
+      <code><![CDATA[getContent]]></code>
+    </UndefinedMethod>
+  </file>
+  <file src="filemanager/include/ftp_class.php">
+    <InvalidArgument>
+      <code><![CDATA[error_get_last()]]></code>
+    </InvalidArgument>
+  </file>
+  <file src="filemanager/include/php_image_magician.php">
+    <UndefinedClass>
+      <code><![CDATA[PhpPsdReader]]></code>
+      <code><![CDATA[\GdImage]]></code>
+      <code><![CDATA[\GdImage]]></code>
+      <code><![CDATA[\GdImage]]></code>
+      <code><![CDATA[\GdImage]]></code>
+    </UndefinedClass>
+    <UndefinedFunction>
+      <code><![CDATA[fix_strtolower($bgColor)]]></code>
+      <code><![CDATA[fix_strtolower($bgColor)]]></code>
+      <code><![CDATA[fix_strtolower($bgColor)]]></code>
+      <code><![CDATA[fix_strtolower($extension)]]></code>
+      <code><![CDATA[fix_strtolower($option)]]></code>
+      <code><![CDATA[fix_strtolower($option[0])]]></code>
+      <code><![CDATA[fix_strtolower($option[0])]]></code>
+      <code><![CDATA[fix_strtolower($pos)]]></code>
+      <code><![CDATA[fix_strtolower($pos)]]></code>
+      <code><![CDATA[fix_strtolower($side)]]></code>
+      <code><![CDATA[fix_strtolower($value)]]></code>
+      <code><![CDATA[fix_strtolower($value)]]></code>
+      <code><![CDATA[fix_strtolower(strrchr($fileName, '.'))]]></code>
+      <code><![CDATA[fix_strtolower(strrchr($watermarkImage, '.'))]]></code>
+    </UndefinedFunction>
+  </file>
+  <file src="filemanager/include/utils.php">
+    <InvalidArgument>
+      <code><![CDATA[$ext]]></code>
+      <code><![CDATA[false]]></code>
+      <code><![CDATA[false]]></code>
+      <code><![CDATA[false]]></code>
+    </InvalidArgument>
+    <InvalidArrayOffset>
+      <code><![CDATA[$config['MaxSizeTotal']]]></code>
+      <code><![CDATA[$config['default_language']]]></code>
+    </InvalidArrayOffset>
+    <InvalidIterator>
+      <code><![CDATA[$phar]]></code>
+    </InvalidIterator>
+    <InvalidReturnStatement>
+      <code><![CDATA[" (@" . $pile[0]["file"] . "#" . $pile[0]["line"] . ")"]]></code>
+      <code><![CDATA[""]]></code>
+      <code><![CDATA[$e->getMessage()]]></code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[null]]></code>
+    </InvalidReturnType>
+    <MissingFile>
+      <code><![CDATA[include 'lang/languages.php']]></code>
+      <code><![CDATA[include 'lang/languages.php']]></code>
+    </MissingFile>
+    <TooFewArguments>
+      <code><![CDATA[check_file_extension($file->getExtension())]]></code>
+    </TooFewArguments>
+    <UndefinedDocblockClass>
+      <code><![CDATA[\Response|\Illuminate\Http\Response]]></code>
+      <code><![CDATA[response('Lang_Not_Found' . AddErrorLocation())]]></code>
+    </UndefinedDocblockClass>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$config]]></code>
+      <code><![CDATA[$config]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="filemanager/upload.php">
+    <InvalidArrayAccess>
+      <code><![CDATA[$_FILES['files']['size'][$i]]]></code>
+      <code><![CDATA[$_FILES['files']['size'][0]]]></code>
+    </InvalidArrayAccess>
+    <InvalidIterator>
+      <code><![CDATA[$_FILES['files']['name']]]></code>
+    </InvalidIterator>
+    <UndefinedDocblockClass>
+      <code><![CDATA[response(trans('forbidden') . AddErrorLocation(), 403)]]></code>
+      <code><![CDATA[response(trans('wrong path') . AddErrorLocation())]]></code>
+    </UndefinedDocblockClass>
+    <UndefinedGlobalVariable>
+      <code><![CDATA[$upload_handler]]></code>
+      <code><![CDATA[$upload_handler]]></code>
+      <code><![CDATA[$upload_handler]]></code>
+    </UndefinedGlobalVariable>
+  </file>
+</files>

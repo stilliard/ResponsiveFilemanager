@@ -19,3 +19,10 @@ tinymce/plugins/responsivefilemanager/plugin.min.js
 
 # PHPStormProject
 /.idea/
+
+# Composer (dev-only; psalm-baseline.xml is committed, not ignored)
+/vendor/
+
+# Playwright
+/test-results/
+/playwright-report/
